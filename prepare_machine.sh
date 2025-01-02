@@ -5,8 +5,8 @@
 
 set -e
 
-$APP_NAME=$1
-$ENV=$2
+$APP_NAME="$1"
+$ENV="$2"
 
 exec > /tmp/user_data.log 2>&1
 if ! grep -q "^ENV=" /etc/environment; then
