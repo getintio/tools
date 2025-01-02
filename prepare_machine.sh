@@ -139,6 +139,8 @@ sudo usermod -aG docker ubuntu
 sudo apt-get install -y docker-compose
 sudo systemctl start docker
 
+sudo apt-get install jq wget -y 
+
 # Place file in getint folder that machine was setup ok
 touch /opt/getint/MACHINE_SETUP_OK
 
