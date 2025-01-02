@@ -59,14 +59,14 @@ case "$ACTION" in
       cd "$LOCAL_DIR"
 
       echo "Downloading the latest version from S3..."
-      aws s3 cp "$${S3_BUCKET}" "$${LOCAL_DIR}/latest-version.zip"
+      aws s3 cp "${S3_BUCKET}" "${LOCAL_DIR}/latest-version.zip"
 
       if [ -d "package" ]; then
           cd package
           echo "Stopping running containers..."
           if docker-compose down; then
               echo "Containers stopped successfully."
-              cd "$${LOCAL_DIR}"
+              cd "${LOCAL_DIR}"
           else
               echo "Failed to stop containers. Exiting."
               exit 1
@@ -75,8 +75,8 @@ case "$ACTION" in
           echo "No existing package directory found. Skipping container shutdown."
       fi
 
-      cd "$${LOCAL_DIR}"
-      if unzip -o "latest-version.zip" -d "$${LOCAL_DIR}/"; then
+      cd "${LOCAL_DIR}"
+      if unzip -o "latest-version.zip" -d "${LOCAL_DIR}/"; then
           echo "Unzip completed successfully."
       else
           echo "Unzip failed but most probably files were unzipped (issue with ..). Check the zip file."
@@ -90,8 +90,8 @@ case "$ACTION" in
       ;;
   stop)
       echo "Stopping containers for $APP_NAME"
-      if [ -d "$${LOCAL_DIR}/package" ]; then
-          cd "$${LOCAL_DIR}/package"
+      if [ -d "${LOCAL_DIR}/package" ]; then
+          cd "${LOCAL_DIR}/package"
           docker-compose down
           echo "Containers stopped successfully."
       else
@@ -100,8 +100,8 @@ case "$ACTION" in
       ;;
   start)
       echo "Starting application for $APP_NAME"
-      if [ -d "$${LOCAL_DIR}/package" ]; then
-          cd "$${LOCAL_DIR}/package"
+      if [ -d "${LOCAL_DIR}/package" ]; then
+          cd "${LOCAL_DIR}/package"
           docker-compose down
           ./run.sh --env aws
           echo "Application started successfully."
