@@ -110,6 +110,16 @@ case "$ACTION" in
           exit 1
       fi
       ;;
+  destroy)
+      read -p "Type 'destroy' to confirm: " CONFIRM
+      if [[ "${CONFIRM}" != "destroy" ]]; then
+          echo "Aborting destruction process."
+          exit 1
+      fi
+      cd "${LOCAL_DIR}/package"
+      docker-compose down --rmi all --volumes
+      cd /opt/getint/
+      rm -rf "${LOCAL_DIR}/package"
   *)
       echo "Usage: $0 {upgrade|stop|start}"
       exit 1
