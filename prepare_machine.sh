@@ -120,6 +120,7 @@ case "$ACTION" in
       docker-compose down --rmi all --volumes
       cd /opt/getint/
       rm -rf "${LOCAL_DIR}/package"
+      ;;
   *)
       echo "Usage: $0 {upgrade|stop|start}"
       exit 1
